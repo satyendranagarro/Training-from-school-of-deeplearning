@@ -17500,3 +17500,9 @@ data/dog_breed_competition/val/yorkshire_terrier/yorkshire_terrier_00123.jpg
 data/dog_breed_competition/val/yorkshire_terrier/yorkshire_terrier_00124.jpg
 data/dog_breed_competition/val/yorkshire_terrier/yorkshire_terrier_00125.jpg
 data/ssd-3-l-dog-breed-classification.zip
+*.jpeg
+*.zip
+*.jpg
+*.csv
+*.png
+data/archive/translate.py

@@ -1,0 +1,52 @@
+Dataset name
+============
+SEN12MS
+
+Year of publication	
+===================
+2019
+
+Author
+======
+Michael Schmitt, Lloyd H. Hughes
+
+License
+=======
+CC-BY
+The dataset contains Copernicus data (2017). Terms and conditions apply: https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/TermsConditions/TC_Sentinel_Data_31072014.pdf
+
+Associated publication
+======================
+Schmitt M, Hughes LH, Qiu C, Zhu XX (2019) SEN12MS - A curated dataset of georeferenced multi-spectral Sentinel-1/2 imagery for deep learning and data fusion. ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences IV-2/W7: 153-160
+
+Links
+=====
+Dataset:	https://mediatum.ub.tum.de/1474000
+Paper:		https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/IV-2-W7/153/2019/
+
+Dataset structure
+=================
+12 .tar.gz-files: One for Sentinel-1 data (_s1), one for Sentinel-2 data (_s2), and one for MODIS land cover data (_lc) per one of four top-level structures: ROIs1158_spring, ROIs1868_summer, ROIs1970_fall, and ROIs2017_winter. 
+
+Dataset size
+============
+No. of files: 	541,986
+Storage:	421.3 GiB
+
+Description
+===========		
+The SEN12MS dataset contains 180,662 patch triplets of corresponding Sentinel-1 dual-pol SAR data, Sentinel-2 multi-spectral images, and MODIS-derived land cover maps. The patches are distributed across the land masses of the Earth and spread over all four meteorological seasons. This is reflected by the dataset structure. All patches are provided in the form of 16-bit GeoTiffs containing the following specific information:
+- Sentinel-1 SAR: 2 channels corresponding to sigma nought backscatter values in dB scale for VV and VH polarization.
+- Sentinel-2 Multi-Spectral: 13 channels corresponding to the 13 spectral bands (B1, B2, B3, B4, B5, B6, B7, B8, B8a, B9, B10, B11, B12).
+- MODIS Land Cover: 4 channels corresponding to IGBP, LCCS Land Cover, LCCS Land Use, and LCCS Surface Hydrology layers.
+
+Auxiliary files
+===============
+- sen12ms_dataLoader.py:	
+  generic data loader routine 
+- seasons.csv:		
+  list of actual seasons during which a scene was acquired, i.e. considering the hemisphere of the ROI. This is necessary since the seasons specified in the file name relate to the meteorological seasons of the northern hemisphere.
+
+Please note:
+============
+If you use the dataset, please cite the associated publication mentioned above.

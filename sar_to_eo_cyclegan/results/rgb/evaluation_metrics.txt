@@ -1,0 +1,12 @@
+Evaluation Results for RGB
+==================================================
+psnr: 16.2552
+psnr_std: 0.1149
+ssim: 0.1300
+ssim_std: 0.0001
+mae: 0.2211
+mae_std: 0.0038
+rmse: 0.3078
+rmse_std: 0.0041
+ndvi_corr: 0.0000
+ndvi_corr_std: 0.0000

@@ -1,0 +1,46 @@
+# Dataset Configuration
+data:
+  sar_dir: "data/raw/ROIs2017_winter_s1"
+  eo_dir: "data/raw/ROIs2017_winter_s2"
+  processed_dir: "data/processed"
+  image_size: 256
+  
+# Band Configurations
+band_configs:
+  rgb:
+    bands: [3, 2, 1]  # B4, B3, B2
+    name: "RGB"
+    channels: 3
+  nir_swir:
+    bands: [7, 10, 4]  # B8, B11, B5
+    name: "NIR_SWIR"
+    channels: 3
+  rgb_nir:
+    bands: [3, 2, 1, 7]  # B4, B3, B2, B8
+    name: "RGB_NIR"
+    channels: 4
+
+# Training Configuration
+training:
+  batch_size: 4
+  num_epochs: 10
+  lr: 0.0002
+  beta1: 0.5
+  lambda_cycle: 10.0
+  # lambda_identity: 5.0
+  lambda_identity: 0.0
+  device: "cuda" 
+  num_workers: 4
+  save_freq: 10
+
+# Model Configuration
+model:
+  input_nc: 2  # SAR VV, VH
+  sar_channels: 2
+  eo_channels: 3
+  ngf: 64
+  ndf: 64
+  norm: "instance"
+  use_dropout: false
+  init_type: "normal"
+  init_gain: 0.02

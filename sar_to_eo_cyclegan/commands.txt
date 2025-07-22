@@ -1,0 +1,25 @@
+<!-- python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate -->
+
+# Install requirements
+pip install -r requirements.txt
+
+# Option A: Train and test all configurations
+
+python main.py --mode both --band_config all
+
+# Option B: Train/test specific configuration
+
+# Train only RGB configuration
+python train.py --band_config rgb
+
+# Test only RGB configuration  
+python test.py --band_config rgb
+
+# Option C: Use individual scripts
+
+# Train specific configuration
+python train.py --config configs/config.yaml --band_config rgb
+
+# Test specific configuration
+python test.py --config configs/config.yaml --band_config rgb --checkpoint final

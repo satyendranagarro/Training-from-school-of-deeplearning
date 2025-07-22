@@ -8,7 +8,7 @@ class GANLoss(nn.Module):
         self.register_buffer('real_label', torch.tensor(target_real_label))
         self.register_buffer('fake_label', torch.tensor(target_fake_label))
         self.gan_mode = gan_mode
-        
+
         if gan_mode == 'lsgan':
             self.loss = nn.MSELoss()
         elif gan_mode == 'vanilla':
@@ -16,42 +16,32 @@ class GANLoss(nn.Module):
         elif gan_mode == 'wgangp':
             self.loss = None
         else:
-            raise NotImplementedError('gan mode %s not implemented' % gan_mode)
+            raise NotImplementedError(f"GAN mode '{gan_mode}' not implemented.")
 
     def get_target_tensor(self, prediction, target_is_real):
-        if target_is_real:
-            target_tensor = self.real_label
-        else:
-            target_tensor = self.fake_label
-        return target_tensor.expand_as(prediction)
+        return self.real_label.expand_as(prediction) if target_is_real else self.fake_label.expand_as(prediction)
 
-    def __call__(self, prediction, target_is_real):
+    def forward(self, prediction, target_is_real):
         if self.gan_mode in ['lsgan', 'vanilla']:
             target_tensor = self.get_target_tensor(prediction, target_is_real)
-            loss = self.loss(prediction, target_tensor)
+            return self.loss(prediction, target_tensor)
         elif self.gan_mode == 'wgangp':
-            if target_is_real:
-                loss = -prediction.mean()
-            else:
-                loss = prediction.mean()
-        return loss
+            return -prediction.mean() if target_is_real else prediction.mean()
 
 class CycleLoss(nn.Module):
     """Cycle consistency loss"""
     def __init__(self):
         super().__init__()
         self.criterion = nn.L1Loss()
-    
-    def __call__(self, real_A, cycled_A, real_B, cycled_B):
-        loss_A = self.criterion(cycled_A, real_A)
-        loss_B = self.criterion(cycled_B, real_B)
-        return loss_A + loss_B
+
+    def forward(self, real_A, cycled_A, real_B, cycled_B):
+        return self.criterion(cycled_A, real_A) + self.criterion(cycled_B, real_B)
 
 class IdentityLoss(nn.Module):
-    """Identity loss for CycleGAN"""
+    """Identity loss for preserving color composition"""
     def __init__(self):
         super().__init__()
         self.criterion = nn.L1Loss()
-    
-    def __call__(self, real, same):
+
+    def forward(self, real, same):
         return self.criterion(same, real)
